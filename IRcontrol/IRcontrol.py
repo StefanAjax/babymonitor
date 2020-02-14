@@ -12,4 +12,6 @@ for led in leds:
     led.frequency = freq
     led.value = PWM_value
 
-sleep(10)
+while True:
+    sleep(1)
+
