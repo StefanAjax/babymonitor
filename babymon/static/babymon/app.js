@@ -1,6 +1,9 @@
 let timerslider = document.getElementById("timerslider");
 let timertext = document.getElementById("timertext");
-var timeForOff
+let timeForOff = document.getElementById("offtime").innerHTML
+console.log(timeForOff);
+
+
 timertext.innerHTML = timerslider.value;
 
 timerslider.oninput = function() {
