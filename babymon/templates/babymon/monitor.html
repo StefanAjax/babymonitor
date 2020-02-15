@@ -4,33 +4,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajax Lindaus Babymonitor</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script type="text/javascript" src="/static/babymon/app.js"></script>
 </head>
-<body background="black">
+<body>
 
 
-<div class="container-fluid bg-secondary">
-
-    <div class="container bg-dark text-center align-middle" >
-      <div class="row justify-content-md-center py-3">
-        <div class="col">
-          <button type="button" class="btn align-middle btn-secondary btn-lg">IR av</button>
-        </div>
-        <div class="col-6">
-          
-          <input type="range" class="form-control-range" min="0" max="5" step="0.5" id="customRange3">
-        </div>
-        <div class="col">
-          <button type="button" class="btn btn-warning btn-lg">IR på</button>
-          
-        </div>
+<div class="container bg-secondary">
+  <div class="container bg-dark text-center align-middle">
+    <div class="row pt-3">
+      <div class="col">
+        <button type="button" class="btn align-middle btn-secondary btn-lg">IR av</button>
       </div>
-      <div class="row py-3">
-        <div class="col-md-auto">
-          <img src="http://192.168.1.188:8000/stream.mjpg" class="img-fluid" alt="Responsive image">
-        </div>
+      <div class="col-3">
+        <input type="range" class="form-control-range" min="2" max="20" step="1" id="timerslider">
+      </div>
+      <div class="col-3">
+        <input type="range" class="form-control-range" min="0" max="100" step="5" id="dutycycleslider">
+      </div>
+      <div class="col">
+        <button type="button" class="btn btn-warning btn-lg">IR på</button>
       </div>
     </div>
-  
+    <div class="row py-1">
+      <div class="col">
+       
+      </div>
+      <div class="col-3 countdown text-light" id="timertext">
+        <p>Timer</p>
+      </div>
+      <div class="col-3 countdown text-light">
+        <p>IR-styrka</p>
+      </div>
+      <div class="col">
+       
+      </div>
+    </div>
+    <div class="row py-3">
+      <div class="col-1"></div>
+      <div class="col-10">
+        <img src="http://192.168.1.188:8000/stream.mjpg" class="img-fluid" alt="Responsive image">
+      </div>
+      <div class="col-1"></div>
+    </div>
+  </div>
 </div>
   
 
