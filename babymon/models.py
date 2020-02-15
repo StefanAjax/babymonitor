@@ -5,7 +5,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 
 class LED(models.Model):
-    on_until = models.DateTimeField()
+    on_until = models.BigIntegerField()
     duty_cycle_percent = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
