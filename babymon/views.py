@@ -1,17 +1,7 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-from babymon.models import LED
 from django.shortcuts import get_object_or_404
-
-# led = gpiozero.PWMLED(14)
-
-# Create your views here.
-
-# def index(request):
-#    led.value=0.5
-#
-#    return HttpResponse("LEDS TOGGLED!")
-
+from rest_framework import viewsets
+from .models import LED
+from .serializers import LEDSerializer
 from django.views.generic import TemplateView
 
 
@@ -20,5 +10,10 @@ class MonitorView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['offtime'] = 1581812941559
+        context['offtime'] = get_object_or_404(LED, pk=1).on_until
         return context
+
+
+class LEDView(viewsets.ModelViewSet):
+    queryset = LED.objects.all()
+    serializer_class = LEDSerializer
