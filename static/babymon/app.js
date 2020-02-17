@@ -29,8 +29,6 @@ document.getElementById("iroffbutton").addEventListener("click", turnOffTimeNow)
 window.setInterval(countdown, 100);
 
 
-
-
 function turnOffTimeNow() {
     newTimeForOff = Date.now()
     timeForOff = newTimeForOff
