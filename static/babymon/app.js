@@ -5,9 +5,6 @@ let timertext = document.getElementById("timertext");
 let timeForOff = document.getElementById("offtime").innerHTML
 let temp
 
-console.log(timeForOff);
-console.log(csrftoken)
-
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
 myHeaders.append("X-CSRFToken", csrftoken);
@@ -26,9 +23,13 @@ dutyslider.oninput = function() {
   dutytext.innerHTML = this.value;
 }
 
+window.setInterval(getTimeForOff, 1000);
 document.getElementById("ironbutton").addEventListener("click", putTimeForOff);
-
 document.getElementById("iroffbutton").addEventListener("click", turnOffTimeNow);
+window.setInterval(countdown, 100);
+
+
+
 
 function turnOffTimeNow() {
     newTimeForOff = Date.now()
@@ -48,6 +49,7 @@ function turnOffTimeNow() {
         .catch(error => console.log('error', error));
 }
 
+
 function putTimeForOff() {
     let newTimeForOff = Date.now() + timerslider.value*1000;
     timeForOff = newTimeForOff
@@ -66,11 +68,11 @@ function putTimeForOff() {
         .catch(error => console.log('error', error));
 }
 
-window.setInterval(countdown, 100);
 
 function countdown(){
     let timeNow = Date.now();
     let timeLeft = timeForOff - timeNow;
+    //console.log(timeForOff)
     //document.getElementById("timeNow").innerHTML = timeNow;
     //document.getElementById("timeForOff").innerHTML = timeForOff;
 
@@ -83,8 +85,6 @@ function countdown(){
     }
 }
 
-
-window.setInterval(getTimeForOff, 1000);
 
 function getTimeForOff(){
 
@@ -99,7 +99,7 @@ function getTimeForOff(){
         .then(result => temp = result)
         .catch(error => console.log('error', error));
         timeForOff = JSON.parse(temp).on_until
-        console.log(temp)
+        //console.log(temp)
 }
 
 

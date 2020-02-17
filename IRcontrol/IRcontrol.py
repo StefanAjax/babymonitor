@@ -1,5 +1,6 @@
 from gpiozero import PWMLED
-from time import sleep
+import time
+
 #
 #percent = int(sys.argv[1])
 #freq = int(sys.argv[2])
@@ -28,7 +29,13 @@ while True:
     data = json.loads(response.text.encode('utf8'))
     on_until = data['on_until']
     duty_cycle_percent = data['duty_cycle_percent']
+    time_now = int(round(time.time() * 1000))
+    time_left = on_until - time_now
+    # print("On Until: {}\tTime Now: {}\tTime Left: {}".format(on_until, time_now, time_left))
     for led in leds:
         # led.frequency = freq
-        led.value = duty_cycle_percent*0.01
-    sleep(1)
+        if time_left > 1200 and abs(time_left) < 25000:
+            led.value = duty_cycle_percent * 0.01
+        else:
+            led.value = 0.0
+    time.sleep(0.2)
