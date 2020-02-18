@@ -9,3 +9,4 @@ class LED(models.Model):
     duty_cycle_percent = models.IntegerField(
         validators=[MinValueValidator(0), MaxValueValidator(100)]
     )
+    all_leds = models.IntegerField()

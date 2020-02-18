@@ -3,7 +3,8 @@ import json
 import time
 from gpiozero import PWMLED
 
-leds = [PWMLED(14, frequency=400), PWMLED(15, frequency=713)]
+led1 = PWMLED(14, frequency=200)
+led2 = PWMLED(15, frequency=500)
 
 url = "http://192.168.1.188/babymon/apileds/1/"
 
@@ -17,13 +18,19 @@ while True:
     data = json.loads(response.text.encode('utf8'))
     on_until = data['on_until']
     duty_cycle_percent = data['duty_cycle_percent']
+    all_leds = data['all_leds']
+
     time_now = int(round(time.time() * 1000))
     time_left = on_until - time_now
-    print("On Until: {}\tTime Now: {}\tTime Left: {}".format(on_until, time_now, time_left))
-    for led in leds:
-        # led.frequency = freq
-        if time_left > 0 and abs(time_left) < 25000:
-            led.value = duty_cycle_percent * 0.01
-        else:
-            led.value = 0.0
+    # print("On Until: {}\tTime Now: {}\tTime Left: {}".format(on_until, time_now, time_left))
+    if time_left > 0 and abs(time_left) < 25000:
+        led1.value = duty_cycle_percent * 0.01
+    else:
+        led1.value = 0.0
+
+    if time_left > 0 and abs(time_left) < 25000 and all_leds == 1:
+        led2.value = duty_cycle_percent * 0.01
+    else:
+        led2.value = 0.0
+
     time.sleep(0.2)

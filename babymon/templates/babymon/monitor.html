@@ -1,69 +1,68 @@
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajax Lindaus Babymonitor</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/8e12fec2dc.js" crossorigin="anonymous"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ajax Lindaus Babymonitor</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <script src="https://kit.fontawesome.com/8e12fec2dc.js" crossorigin="anonymous"></script>
 
 </head>
+
 <body>
 
-  <div class="invisible" id="offtime">{{ offtime }}</div>
+  <div class="invisible" id="offtime"> <button type="button" class="btn btn-dark hidden" id="iroffbutton"><i
+        class="fas fa-power-off"></i></div>
   <div class="invisible" id="csrftoken">{% csrf_token %}</div>
-<div class="container-fluid bg-secondary h-100 pt-3">
-  <div class="container bg-dark text-center align-middle">
-    <div class="row pt-2">
-      <div class="col">
-       
+  <div class="container-fluid bg-secondary h-100 pt-3">
+    <div class="container bg-dark text-center align-middle">
+
+      <div class="row py-3">
+        <div class="col-1"></div>
+
+        <div class="col text-light">
+          <h2><i class="fas fa-clock"></i> <span id="timertext"></span>s</h2>
+          <input type="range" class="form-control-range " value="4" min="1" max="20" step="1" id="timerslider"><br>
+
+        </div>
+        <div class="col-2 align-top">
+          <div class="btn-group-vertical">
+            <button type="button" class="btn btn-warning" id="bigbutton"><i class="fas fa-power-off"></i><br>
+              <span id="timeLeft">0.0</span></button>
+            <div class="btn-group" role="group" aria-label="Basic example">
+              <button type="button" id="7LED" class="btn btn-secondary">7 LEDS</button>
+              <button type="button" id="14LED" class="btn btn-secondary">14 LEDS</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="col text-light">
+          <h2><i class="fas fa-sun"></i> <span id="dutytext"></span>%</h2>
+          <input type="range" class="form-control-range" value="5" min="0" max="100" step="1" id="dutyslider">
+        </div>
+        <div class="col-1"></div>
       </div>
-      <div class="col-3 countdown text-light align-top">
-        <h2><i class="fas fa-clock"></i> <span id="timertext"></span>s</h2>
-      </div>
-      <div class="col-3 countdown text-light align-top">
-        <h2><i class="fas fa-sun"></i> <span id="dutytext"></span>%</h2>
-      </div>
-      <div class="col">
-       
-      </div>
-    </div>
-    <div class="row pt-3">
-      <div class="col-1"></div>
-      <div class="col text-center">
-        <button type="button" class="btn btn-secondary btn-lg" id="iroffbutton">IR av</button><p id="offdemo"></p>
-      </div>
-      <div class="col-3 align-bottom">
-        <input type="range" class="form-control-range " value="4" min="1" max="20" step="1" id="timerslider"><br>
-        
-      </div>
-      <div class="col-3 align-bottom">
-        <input type="range" class="form-control-range" value="5" min="0" max="100" step="1" id="dutyslider">
-      </div>
-      <div class="col">
-        <button type="button" class="btn btn-warning btn-lg" id="ironbutton"><i class="fas fa-power-off"></i><br><span id="timeLeft">0.0</span></button></p>
-      </div>
-      <div class="col-1"></div>
-    </div>
 
 
-    <div class="row">
-      <div class="col-1"></div>
-      <div class="col-10">
-        <img src="http://192.168.1.188:8000/stream.mjpg" class="img-fluid" alt="Responsive image">
+      <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10">
+          <img src="http://192.168.1.188:8000/stream.mjpg" class="img-fluid border border-secondary" alt="Responsive image">
+        </div>
+        <div class="col-1"></div>
       </div>
-      <div class="col-1"></div>
-    </div>
-    <div class="row py-3">
-      <div class="col-5"></div>
-      <div class="col-2">
-         <h1></h1>
+      <div class="row py-3">
+        <div class="col-5"></div>
+        <div class="col-2">
+
+        </div>
+        <div class="col-5"></div>
       </div>
-      <div class="col-5"></div>
     </div>
   </div>
-</div>
 
-<script type="text/javascript" src="/static/babymon/app.js"></script>
+  <script type="text/javascript" src="/static/babymon/app.js"></script>
 </body>
-</html>
 
+</html>

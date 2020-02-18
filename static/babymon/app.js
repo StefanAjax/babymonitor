@@ -24,7 +24,7 @@ dutyslider.oninput = function() {
 }
 
 window.setInterval(getTimeForOff, 1000);
-document.getElementById("ironbutton").addEventListener("click", putTimeForOff);
+document.getElementById("bigbutton").addEventListener("click", putTimeForOff);
 document.getElementById("iroffbutton").addEventListener("click", turnOffTimeNow);
 window.setInterval(countdown, 100);
 
@@ -33,7 +33,7 @@ function turnOffTimeNow() {
     newTimeForOff = Date.now()
     timeForOff = newTimeForOff
 
-    var raw = JSON.stringify({"on_until":newTimeForOff,"duty_cycle_percent":dutyslider.value});
+    var raw = JSON.stringify({"on_until":newTimeForOff,"duty_cycle_percent":dutyslider.value,"all_leds":1});
     var requestOptions = {
         method: 'PUT',
         headers: myHeaders,
@@ -52,7 +52,7 @@ function putTimeForOff() {
     let newTimeForOff = Date.now() + timerslider.value*1000;
     timeForOff = newTimeForOff
 
-    var raw = JSON.stringify({"on_until":newTimeForOff,"duty_cycle_percent":dutyslider.value});
+    var raw = JSON.stringify({"on_until":newTimeForOff,"duty_cycle_percent":dutyslider.value,"all_leds":1});
     var requestOptions = {
         method: 'PUT',
         headers: myHeaders,
@@ -73,13 +73,16 @@ function countdown(){
     //console.log(timeForOff)
     //document.getElementById("timeNow").innerHTML = timeNow;
     //document.getElementById("timeForOff").innerHTML = timeForOff;
+    //console.log(timeLeft);
 
     if (timeLeft < 0) {
-        document.getElementById("timeLeft").outerHTML =  '<span id="timeLeft" class="card text-dark bg-secondary">0.0</span>'
+        
+        document.getElementById("timeLeft").innerText =  '0.0'
+        document.getElementById("ironbutton").className = 'btn btn-dark'
     }
     else {
-        document.getElementById("timeLeft").outerHTML =  '<span id="timeLeft" class="card text-dark bg-warning"></span>'
-        document.getElementById("timeLeft").innerHTML = (timeLeft/1000).toFixed(1);
+        document.getElementById("timeLeft").innerText = (timeLeft/1000).toFixed(1);
+        document.getElementById("ironbutton").className = 'btn btn-warning'
     }
 }
 
@@ -93,11 +96,12 @@ function getTimeForOff(){
       };
       
         fetch("http://192.168.1.188/babymon/apileds/1/", requestOptions)
-        .then(response => response.text())
-        .then(result => temp = result)
-        .catch(error => console.log('error', error));
-        timeForOff = JSON.parse(temp).on_until
-        //console.log(temp)
+        .then((response) => {
+          return response.json();
+        })
+        .then((myJson) => {
+          timeForOff = myJson.on_until;
+        });
 }
 
 
