@@ -4,6 +4,8 @@ let timerslider = document.getElementById("timerslider");
 let timertext = document.getElementById("timertext");
 let timeForOff = document.getElementById("offtime").innerHTML
 let temp
+let all_leds = 0
+
 
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
@@ -26,6 +28,47 @@ dutyslider.oninput = function() {
 window.setInterval(getTimeForOff, 1000);
 document.getElementById("bigbutton").addEventListener("click", putTimeForOff);
 document.getElementById("iroffbutton").addEventListener("click", turnOffTimeNow);
+document.getElementById("7LED").addEventListener("click", led7);
+document.getElementById("14LED").addEventListener("click", led14);
+
+function led7(){
+  all_leds = 0
+  console.log("all_leds: " + all_leds);
+
+  var raw = JSON.stringify({"all_leds":all_leds});
+  var requestOptions = {
+      method: 'PATCH',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    
+    fetch("http://192.168.1.188/babymon/apileds/1/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
+}
+
+
+function led14(){
+  all_leds = 1;
+  console.log("all_leds: " + all_leds);
+
+  var raw = JSON.stringify({"all_leds":all_leds});
+  var requestOptions = {
+      method: 'PATCH',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    
+    fetch("http://192.168.1.188/babymon/apileds/1/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+}
+
 window.setInterval(countdown, 100);
 
 
@@ -33,7 +76,7 @@ function turnOffTimeNow() {
     newTimeForOff = Date.now()
     timeForOff = newTimeForOff
 
-    var raw = JSON.stringify({"on_until":newTimeForOff,"duty_cycle_percent":dutyslider.value,"all_leds":1});
+    var raw = JSON.stringify({"on_until":newTimeForOff,"duty_cycle_percent":dutyslider.value,"all_leds":all_leds});
     var requestOptions = {
         method: 'PUT',
         headers: myHeaders,
@@ -52,7 +95,7 @@ function putTimeForOff() {
     let newTimeForOff = Date.now() + timerslider.value*1000;
     timeForOff = newTimeForOff
 
-    var raw = JSON.stringify({"on_until":newTimeForOff,"duty_cycle_percent":dutyslider.value,"all_leds":1});
+    var raw = JSON.stringify({"on_until":newTimeForOff,"duty_cycle_percent":dutyslider.value,"all_leds":all_leds});
     var requestOptions = {
         method: 'PUT',
         headers: myHeaders,
@@ -78,11 +121,11 @@ function countdown(){
     if (timeLeft < 0) {
         
         document.getElementById("timeLeft").innerText =  '0.0'
-        document.getElementById("ironbutton").className = 'btn btn-dark'
+        document.getElementById("bigbutton").className = 'btn btn-dark'
     }
     else {
         document.getElementById("timeLeft").innerText = (timeLeft/1000).toFixed(1);
-        document.getElementById("ironbutton").className = 'btn btn-warning'
+        document.getElementById("bigbutton").className = 'btn btn-warning'
     }
 }
 
