@@ -34,6 +34,8 @@ document.getElementById("14LED").addEventListener("click", led14);
 function led7(){
   all_leds = 0
   console.log("all_leds: " + all_leds);
+  document.getElementById("7LED").className = "btn btn-primary"
+  document.getElementById("14LED").className = "btn btn-secondary"
 
   var raw = JSON.stringify({"all_leds":all_leds});
   var requestOptions = {
@@ -43,7 +45,7 @@ function led7(){
       redirect: 'follow'
     };
     
-    fetch("http://192.168.1.188/babymon/apileds/1/", requestOptions)
+    fetch("http://192.168.0.18/babymon/apileds/1/", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
@@ -55,6 +57,9 @@ function led14(){
   all_leds = 1;
   console.log("all_leds: " + all_leds);
 
+  document.getElementById("14LED").className = "btn btn-primary"
+  document.getElementById("7LED").className = "btn btn-secondary"
+
   var raw = JSON.stringify({"all_leds":all_leds});
   var requestOptions = {
       method: 'PATCH',
@@ -63,7 +68,7 @@ function led14(){
       redirect: 'follow'
     };
     
-    fetch("http://192.168.1.188/babymon/apileds/1/", requestOptions)
+    fetch("http://192.168.0.18/babymon/apileds/1/", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
@@ -84,7 +89,7 @@ function turnOffTimeNow() {
         redirect: 'follow'
       };
       
-      fetch("http://192.168.1.188/babymon/apileds/1/", requestOptions)
+      fetch("http://192.168.0.18/babymon/apileds/1/", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
@@ -103,7 +108,7 @@ function putTimeForOff() {
         redirect: 'follow'
       };
       
-      fetch("http://192.168.1.188/babymon/apileds/1/", requestOptions)
+      fetch("http://192.168.0.18/babymon/apileds/1/", requestOptions)
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
@@ -138,7 +143,7 @@ function getTimeForOff(){
         redirect: 'follow'
       };
       
-        fetch("http://192.168.1.188/babymon/apileds/1/", requestOptions)
+        fetch("http://192.168.0.18/babymon/apileds/1/", requestOptions)
         .then((response) => {
           return response.json();
         })

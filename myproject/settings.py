@@ -37,7 +37,7 @@ with open('/etc/babymonitor/BABY_DB_PASSWORD') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.1.188']
+ALLOWED_HOSTS = ['192.168.0.18']
 
 
 # Application definition
